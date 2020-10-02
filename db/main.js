@@ -5,7 +5,8 @@ const sequelize = new Sequelize(database, username, password, {
     freezeTableName: true
   },
   host,
-  dialect: 'mysql'/* 选择 'mysql' | 'mariadb' | 'postgres' | 'mssql' 其一 */
+  dialect: 'mysql',/* 选择 'mysql' | 'mariadb' | 'postgres' | 'mssql' 其一 */
+  timezone: '+08:00'
 });
 (async function(){
   await sequelize.sync();

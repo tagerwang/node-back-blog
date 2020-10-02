@@ -6,8 +6,9 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var cors = require('cors')
 var app = express();
+app.use(cors())
 var bodyParser = require('body-parser');//用于req.body获取值的
 app.use(bodyParser.json());
 // 创建 application/x-www-form-urlencoded 编码解析

@@ -3,7 +3,8 @@ var sequelize = require('../db/main');
 var router = express.Router();
 
 // 增
-router.get('/crete', async function(req, res, next) {
+router.get('/create', async function(req, res, next) {
+  const {name = '', password = ''} = req.body
   res.render('index', { title: 'Express' });
 });
 // 删

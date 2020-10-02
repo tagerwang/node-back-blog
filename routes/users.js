@@ -38,6 +38,7 @@ router.post('/login', async function(req, res, next) {
   const {name = '', password = ''} = req.body
   let result = {}
   const getData = await User.findAll({
+    attributes: ['name', 'password'],
     where: {
       name,
       password
