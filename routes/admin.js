@@ -3,7 +3,7 @@ var router = express.Router();
 const Admin = require('../db/model/Admin')
 // 增
 router.post('/create', async function(req, res, next) {
-  const {title = '', desc = '', content = ''} = req.body
+  const {title = '', desc = '', content = '', articleType = 0} = req.body
   if(!title || !desc || !content) {
     res.status(200).send({
       code: 100002,
@@ -12,7 +12,7 @@ router.post('/create', async function(req, res, next) {
     return 
   }
   let result = {}
-  await Admin.create({ title, desc, content }).catch(err=>{
+  await Admin.create({ title, desc, content, articleType: articleType||0 }).catch(err=>{
     if(err && err.original) {
       const {errno, sqlMessage} = err.original
       result.code = errno
@@ -40,14 +40,16 @@ router.post('/delete', async function(req, res, next) {
 });
 // 改
 router.post('/edit', async function(req, res, next) {
-  const {articleId, title, desc, content, articleType} = req.body
+  const {articleId, title, desc, content, articleType, updatedAt} = req.body
   let updateData = {}
   title && (updateData.title = title)
   desc && (updateData.desc = desc)
   content && (updateData.content = content)
+  content && (updateData.updatedAt = updatedAt)
   articleType && (updateData.articleType = articleType)
   let result = {}
   await Admin.update(updateData,{
+    // attributes: ['title', 'desc', 'content', 'updatedAt', 'articleType'],
     where: {
       articleId
     }

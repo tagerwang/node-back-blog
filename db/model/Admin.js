@@ -29,6 +29,11 @@ Admin.init({
     type: DataTypes.INTEGER,
     allowNull: false,
     defaultValue: 0
+  },
+  author: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: 'tager'
   }
 }, {
   // 这是其他模型参数
@@ -36,7 +41,7 @@ Admin.init({
   modelName: 'Admin', // 我们需要选择模型名称
   freezeTableName: true
 });
-(async function(){
-  await sequelize.sync({alter: true});
-})();
+// (async function(){
+//   await sequelize.sync({alter: true});
+// })();
 module.exports = Admin
